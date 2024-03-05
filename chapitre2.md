@@ -203,4 +203,128 @@ vi /fichier/new_file
 nano
 ^ est remplacé par ctrl pour executer les commandes nano
 
+## Inode
+Linux est construit autour de la philosophie de fichier
+Sans entrer trop dans le détail, un fichier est une structure du langage C définie directement au niveau du code noyau de Linux. Oui ! Ne soyez pas choqué, ce lien pointe vers le code C officiel du noyau Linux !
 
+Cette structure est nommée inode. Elle peut se représenter par une liste de champs illustrée généralement sous la forme d’un tableau, que l'on va étudier par dézooms successifs.
+
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+L’adresse contenue dans la ligne 13 renvoie à un nouvel inode ou bloc de pointeurs. Ce nouvel inode contient, lui, 128 lignes. Chacune des adresses contenues dans ces lignes renvoient vers un bloc de données. On dit que ces blocs de donnés sont indirects :
+
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
+En résumé
+vi est l'éditeur de texte en mode terminal de référence sous Linux
+
+emacs intègre des extensions en langage lips qui font de lui bien plus d'un simple éditeur de texte 
+
+nano est un éditeur très intéressant pour faire la transition depuis le monde Windows
+
+Les fichiers sont représentés dans le noyau Linux par des structures nommées inode
+
+Les opérations classiques de Copie/Déplacement/Suppression de fichier sous Linux sont exécutées sur les inodes avec les commandes cp/mv/rm
+
+Les liens durs/symboliques sous Linux représentent des pointeurs entre inodes et sont gérés avec la commande ln
+
+
+## chapitre 2.4
+
+pour changer de compte sut le terminal ubuntu :  su root (whoami)
+ le principe fondamental de la gestion des droits sous Linux dit DAC pour Discretionary Access Control.
+
+ Les droits associés à ces objets sont donc définis pour :
+
+Le propriétaire de l'objet : pour le propriétaire noté u (pour "user") ;
+
+Le groupe propriétaire de l'objet :pour le groupe propriétaire noté g (pour "group") ;
+
+Tous les autres : comptes utilisateurs et/ou système qui ne sont pas le compte et le groupe propriétaire.  tous les autres, notés eux o (pour "others" comme un très bon film d’ailleurs).
+
+L'ordre : rwx u, rwx g, rwx o
+
+changer de droits :
+chmod u+rwx fichiernom donne le droit a celui qui est connecté de rwx sur le fichier fichiernom
+ça fonctionne si le fichier appartient a l utulisateur connecté. sinon, s il appartient a root, c est root qui doit donnéer ces droits.
+
+chmod g+w nomfichier donne le droit d'ecriture au groupe de proprietaires
+chmod ugo-rw+x =chmod a=x retire r et w et donne la permission x
+
+Simplifiez la gestion des droits avec la valeur numérique des droits
+
+Le bit x est en position 0, sa valeur lorsqu'il est positionné à 1, en base 2 est donc 1x2exp0, soit 1 ;
+
+Le bit w est en position 1, sa valeur lorsqu'il est positionné à 1, en base 2 est donc 1x2exp1, soit 2 ;
+
+Le bit r est en position 2, sa valeur lorsqu'il est positionné à 1, en base 2 est donc 1x2exp2, soit 4 ;
+chmod 666= droits rw a tous
+chmod 665= droits rw a user et groupe et droits rx aux autres
+
+- - -  ->  000  ->  0+0+0  ->  0
+
+- - x    ->  001  ->  0+0+1  ->  1
+
+- w -->  010  ->  0+2+0  ->  2
+
+- w x->  011  ->  0+2+1  ->  3
+
+r - -->  100  ->  4+0+0  ->  4
+
+r - x->  101  ->  4+0+1  ->  5
+
+r w -->  110  ->  4+2+0  ->  6
+
+r w x->  111  ->  4+2+1  ->  7
+
+chown changer owner d un fichier
+
+chown nomDeNouveauOwner:nomProprietaire fichierNom
+il faut etre root pour pouvoir faire ce grenre de changelent
+
+chgrp nomNouveauGroupeProprietaire proprietaire
+chmod -R propt:propr * (donne toutes les droits sur tous les fichiers a seb) -R change même a l interieur des dossiers les droits sur ces fichiers de l'interieur
+
+Il existe deux droits spéciaux supplémentaires :
+
+Le premier de ces droits particuliers se nomme le SetUID bit, et son petit frère le SetGID bit. Ce droit permet notamment d’exécuter un fichier avec les droits de son propriétaire ! C’est très important, car de nombreux aspects de la gestion des droits sous Linux utilisent cette propriété fondamentale.
+
+Le second est le Sticky Bit(le "bit collant"). Ce droit est une tentative de gestion d'espaces collaboratifs, proposé par la branche BSD de Unix au milieu des années 80 (même si une version antérieure de cette fonctionnalité existait déjà sur Unix dès les années 70, mais pas du tout avec le même objectif).
+
+SETUID bit droit
+
+le droit rwsr... dit que tous herite des droits du compte proprietaire (setuid bit)
+
+exp:
+sur /etc/shadow, la où il y a les mdp des comptes, il y a que des droits d execution et de lecture pour root et lecture pour shadow groupe et rien pour le reste (ls -l avec root)
+
+mais je peux comme utilisateur cristina par exemple changer le mdp de mon compte, donc acceder a ce fichier shadow avec les mdp
+
+C'est car connecté comme  cristina avec ls -l /bin/passwd j ai:
+rws pour l user root. ce qui dit que tous heritent des droits du compte proprietaire (droit setuid bit)
+
+
+Sticky Bit
+chmod 1reste de bits fichier : 1744 par exmp donne les droits rwxr--r-T ou T represente Sticky bit : ts peuvent partager/modifier le fichier mais pas le supprimer
+En résumé
+Le contrôle d'accès sous Linux est discrétionnaire (DAC)
+
+Les droits d'accès sont donc définis pour 3 entités : le propriétaire de l'objet, le groupe propriétaire et tous les autres comptes utilisateurs et/ou système.
+
+Les droits d'accès sont également définis avec 3 bits : READ, WRITE et EXECUTE
+
+Au total, il faut 9 bits (READ, WRITE et EXECUTE x 3 entités) pour définir les droits d'accès d'un objet sous Linux
+
+Ces droits sont exprimés en puissance de 2 avec les valeurs 0, 1, 2 et 4 offrant une combinaison unique, par exemple 755
+
+Les commandes chown/chgrp("change owner"/"change group") permettent de changer le propriétaire et le groupe propriétaire d'un objet
+
+SetUID est un droit spécial permettant d'exécuter un fichier avec les droits de son propriétaire 
+
+Sticky Bit est un droit spécial permettant de gérer des espaces partagés

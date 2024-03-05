@@ -1,4 +1,10 @@
 # Linux - systèmes d'exploitation 
+Debian et Ubuntu sont deux distributions Linux populaires
+
+Unix et Linux sont deux systèmes d'exploitation qui partagent une histoire et une architecture similaires, mais ils présentent également des différences importantes.
+
+Linux peut être considéré comme une implémentation open source et moderne du concept Unix, qui a gagné en popularité en raison de sa disponibilité gratuite, de sa flexibilité et de son écosystème diversifié de distributions.
+
 
 ## Terminal/ Shell/ Prompt
 

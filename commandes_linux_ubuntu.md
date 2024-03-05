@@ -1,10 +1,36 @@
 
 ls
+
+ls -li (i = inode) (inode = nr avant les droits du fichier)
+
+
+
 cd 
+
+cp (copy)
+
+cp fichier newnamefichier 
+
+
+mv (move)
+
+mv fichier newnamefichier 
+
+ln (lien)
+
+ln fichiersource fichierdestinzation ( destination garde le m^me nr de refference que la source)
+mais si je modifie un de deux, quand je fais cat de l autre je vais avoir les même modif car la reference est la même donc a cette adresse de memire j'ai les modif 
+
+cat fichier 1 > fichier2 (cree fichier 2 s il n existe pas et dit que fichier 1 pointe vers fichier 2)
+
+ln -s (symbolique)
+
+rm fichier
+
 
 cat -consulter un fichier
 
-cat fichier or cat /fichier1 / fichier 2
+cat fichier or cat /fichier1 /fichier 2
 cat -n /fichier = avec nr de ligne
 
 less - visualiser des fichiers
@@ -59,3 +85,43 @@ cat /etc/password | grep nologin | grep -E "[0-9][0-9]" (no login  avec l id sup
 cat /etc/password | grep nologin | grep -E "[0-9][0-9]" | sort (fais un  sort alphabetique)
 cat /etc/password | grep nologin | grep -E "[0-9][0-9]" | sort | cut  -d :-f 1 (recuper le premier champ)
 cat /etc/password | grep nologin | grep -E "[0-9][0-9]" | sort | cut  -d : f 1 | sed 's/games/seb/'  remplacer games par seb
+
+
+
+chmod 
+
+chmod u+rwx
+chmod ugo-rw+x 
+chmod 666= droits rw a tous
+chmod 665= droits rw a user et groupe et droits rx aux autres
+7 toutes les doits 
+6 droits rw
+5 rx
+4 r
+3 wx
+2 w
+1 x
+0 - 
+
+ls -l : L'ordre : rwx u, rwx g, rwx o
+
+chown changer owner d un fichier
+
+chown nomDeNouveauOwner:nomProprietaire fichierNom
+il faut etre root pour pouvoir faire ce grenre de changelent
+
+chgrp nomNouveauGroupeProprietaire proprietaire
+chmod -R propt:propr * (donne toutes les droits sur tous les fichiers a seb) -R change même a l interieur des dossiers les droits sur ces fichiers de l'interieur
+
+
+passwd permet de changer le mdp
+
+SETUID bit droit
+
+le droit rwsr... dit que tous herite des droits du compte proprietaire de la commande  setuid bit, 
+pour attribbuer le role s: 
+chmod 4755 fichier = rws sur le fichier
+l attribution d un droit comme ça a un fichier donne le doits a tt le monde d executer le fichier 1 en se faisant passer par le proprietaire du fichier
+
+Sticky Bit
+chmod 1reste de bits fichier : 1744 par exmp donne les droits rwxr--r-T ou T represente Sticky bit : ts peuvent partager/modifier le fichier mais pas le supprimer
