@@ -1,4 +1,4 @@
-# Linux
+# Linux - systèmes d'exploitation 
 
 ## Terminal/ Shell/ Prompt
 
@@ -67,7 +67,9 @@ de nouveau ctrl+r pour remonter dans l'historique
 type ls = aliase...
 
 pour ajouter des aliases on doit modifier le fichier .bashrc et ajouter 
+
 ![alt text](image-1.png)
+
 declaration d alias:
 ajouter dans .bashsrc
 alias ll='ls -lrtha'
