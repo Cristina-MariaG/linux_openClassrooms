@@ -1,10 +1,56 @@
 
+&& cumule des commandes :
+exp: cd fichier && file *
+
 ls
 
 ls -li (i = inode) (inode = nr avant les droits du fichier)
+ls  -l (avec details) or -l -t (modifié plus recemment)
+ls -l -r (les plus vieux elem en premier)
+ls -l -t -r = ls -lrt
+
+ls -lRt = plus details s'il y a des dossier avec des fichiers trouvé dans notre dossier ou on fait ls
+
+ls -lRth = volume des fichiers traduit en oct or mb
+
+ls -lrth rep1 liste le repertoire 1.lrt -se sont  options et rep1 est argument
+
+ls -lrtha
+type bash => commende externe bash
+echo = commande interne dans le shell
+
+file fichier= serie d infos concernant le fichire
+touch = create file
+
+ id --command pour info sur l utilisateur 
+type id  = comand extern presente dans un fichiere
 
 
+help =liste des commandes interne dispo dans le shell
 
+help echo = details sur echo commande interne
+
+commande externe( exp id) : commande --help
+
+id --help = resumé
+man (manuel) 
+man id = plus detaillé
+
+history
+
+pour une commande de history:
+!number qui se trouve apres ce qu'on tappe history
+
+
+ctrl +r = recherche de commande avec une partie tappé
+de nouveau ctrl+r pour remonter dans l'historique
+
+declaration d alias:
+ajouter dans .bashsrc
+alias ll='ls -lrtha'
+alias pour voir toutes les alias definis
+
+mkdir = make directory
 cd 
 
 cp (copy)
@@ -15,6 +61,8 @@ cp fichier newnamefichier
 mv (move)
 
 mv fichier newnamefichier 
+
+rm remove
 
 ln (lien)
 
@@ -28,7 +76,7 @@ ln -s (symbolique)
 rm fichier
 
 
-cat -consulter un fichier
+cat -consulter un fichier afficher dans le terminal le contenu
 
 cat fichier or cat /fichier1 /fichier 2
 cat -n /fichier = avec nr de ligne
@@ -53,12 +101,12 @@ grep -i mot /fichier pas case sensitive
 grep -ni mot /fichier (i = pas case sensitive)
 grep -nio mot /fichier ( afficher que le mot cherche dans le fichier et pas le reste du texte sur la ligne)
 
-grep -rnio motCherche /fichier/* - cherche et affichie les resultats dans toute l'arborescence de /fichier
+grep -rnio motCherche /dossier/* - cherche et affichie les resultats dans toute l'arborescence de /dossier
 
 sed / awk
 
 
-sed :
+sed : remplacer un mot avec un autre dans un fichier
 
 sed 's/Mot/MOT/'  /fichier : remplace Mot avec MOT dans fichier mais seulement pour lecture
 
@@ -72,7 +120,7 @@ pour enregistrer des remplacements
 cat /etc/os-release >home/seb/os-release
 sed -i 's/[M|m]ot/MOT/' /home/seb/os-release va changer les mots et enregistrer
 
-sed -n 2,6p /fichier (p comme print, sorte standard)
+sed -n 2,6p /fichier (p comme print, sortie standard)
 sed -n 2,6p /fichier > /fichier
 
 sort et cut

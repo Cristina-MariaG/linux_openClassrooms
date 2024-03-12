@@ -7,8 +7,14 @@ Linux peut être considéré comme une implémentation open source et moderne du
 
 
 ## Terminal/ Shell/ Prompt
+ terminal= on l utilise pour parler aux machines/serveurs
+ à distance = emulator de terminal
+ shell = interpreteur de commandes
+ shell linux reference = bash
 
-$echo $SHELL --to know the shell type
+echo $SHELL --to know the shell type
+echo $PS1
+
 
 ls
 ls  -l (avec details) or -l -t (modifié plus recemment)
@@ -26,7 +32,7 @@ ls -lrtha
 
 affiche les fichiers cachés
 
-il y a des commandes buitin et des commandes externe (present comme un fichier)
+il y a des commandes builtin et des commandes externe (present comme un fichier)
 type echo --return echo is a shell builtin
 type bash =bash is /usr/bin/bash 
 
@@ -49,7 +55,7 @@ export PATH=$PATH:/adresse des fichiers qu on veut pouvoir executer de partout/
 on verifie echo $PATH qui doit contenir l adresse just ajouté
 
 
-help =liste des commandes interne dispo dan sle shell
+help =liste des commandes interne dispo dans le shell
 
 help echo = details sur echo commande interne
 
@@ -79,7 +85,7 @@ pour ajouter des aliases on doit modifier le fichier .bashrc et ajouter
 declaration d alias:
 ajouter dans .bashsrc
 alias ll='ls -lrtha'
-
+alias pour voir toutes les alias definis
 
 #resumés
 ch1.2
